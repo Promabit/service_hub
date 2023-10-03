@@ -26,7 +26,7 @@ class EchoCharacteristic(Characteristic):
         hexValue = [hex(c) for c in self._value]
         received_text = hexValue.decode('utf-8')
 
-        print('EchoCharacteristic - %s - onWriteRequest: value = %s' % (self['uuid'], [hex(c) for c in self._value]))
+        print('EchoCharacteristic - %s - onWriteRequest: value = %s' % (self['uuid'], received_text))
 
         if self._updateValueCallback:
             print('EchoCharacteristic - onWriteRequest: notifying')

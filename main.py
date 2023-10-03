@@ -8,6 +8,7 @@ print('bleno - echo')
 bleno = Bleno()
 
 uuid = "0000ec00-0000-1000-8000-00805f9b34fb"
+characteristicId = "0000ec0f-0000-1000-8000-00805f9b34fb"
 
 def onStateChange(state):
    print('on -> stateChange: ' + state)
@@ -27,7 +28,7 @@ def onAdvertisingStart(error):
             BlenoPrimaryService({
                 'uuid': uuid,
                 'characteristics': [
-                    EchoCharacteristic('ec0F')
+                    EchoCharacteristic(characteristicId)
                     ]
             })
         ])

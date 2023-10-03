@@ -17,7 +17,9 @@ class EchoCharacteristic(Characteristic):
         self._updateValueCallback = None
 
     def onReadRequest(self, offset, callback):
-        print('EchoCharacteristic - %s - onReadRequest: value = %s' % (self['uuid'], [hex(c) for c in self._value]))
+        value = [hex(c) for c in self._value]
+        received_text = value.decode('utf-8')
+        print('EchoCharacteristic - %s - onReadRequest: value = %s' % (self['uuid'], received_text))
         callback(Characteristic.RESULT_SUCCESS, self._value[offset:])
 
     def onWriteRequest(self, data, offset, withoutResponse, callback):
@@ -31,13 +33,3 @@ class EchoCharacteristic(Characteristic):
             self._updateValueCallback(self._value)
 
         callback(Characteristic.RESULT_SUCCESS)
-
-    def onSubscribe(self, maxValueSize, updateValueCallback):
-        print('EchoCharacteristic - onSubscribe')
-
-        self._updateValueCallback = updateValueCallback
-
-    def onUnsubscribe(self):
-        print('EchoCharacteristic - onUnsubscribe')
-
-        self._updateValueCallback = None

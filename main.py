@@ -7,11 +7,13 @@ print('bleno - echo')
 
 bleno = Bleno()
 
+uuid = "0000ec00-0000-1000-8000-00805f9b34fb"
+
 def onStateChange(state):
    print('on -> stateChange: ' + state)
 
    if (state == 'poweredOn'):
-     bleno.startAdvertising('echo', ['ec00'])
+     bleno.startAdvertising('echo', [uuid])
    else:
      bleno.stopAdvertising()
 
@@ -23,7 +25,7 @@ def onAdvertisingStart(error):
     if not error:
         bleno.setServices([
             BlenoPrimaryService({
-                'uuid': 'ec00',
+                'uuid': uuid,
                 'characteristics': [
                     EchoCharacteristic('ec0F')
                     ]

@@ -1,4 +1,4 @@
-const bleno = require('@abandonware/bleno');
+const bleno = require('bleno');
 
 const MY_SERVICE_UUID = '12ab';
 const MY_CHARACTERISTIC_UUID = '34cd';

@@ -36,10 +36,16 @@ def onAdvertisingStart(error):
     else:
         print('Error in advertising start: ', error)
 
+def onServicesSet(error):
+    if error:
+        print('Services setting failed: ', error)
+    else:
+        print('Services successfully set')
 
 
 bleno.on('stateChange', onStateChange)
 bleno.on('advertisingStart', onAdvertisingStart)
+bleno.on('servicesSet', onServicesSet)
 bleno.start()
 
 print ('Hit <ENTER> to disconnect')

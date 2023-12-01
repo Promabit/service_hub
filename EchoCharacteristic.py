@@ -1,8 +1,5 @@
 from pybleno import Characteristic
 import array
-import struct
-import sys
-import traceback
 
 class EchoCharacteristic(Characteristic):
 

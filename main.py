@@ -3,27 +3,28 @@ import sys
 import signal
 from EchoCharacteristic import *
 
-print('bleno - echo')
-
-bleno = Bleno()
 
 uuid = "0000ec00-0000-1000-8000-00805f9b34fb"
 characteristicId = "0000ec0f-0000-1000-8000-00805f9b34fb"
+
+bleno = Bleno()
 
 def onStateChange(state):
    print('on -> stateChange: ' + state)
 
    if (state == 'poweredOn'):
+     print('Starting to advertise...')
      bleno.startAdvertising('echo', [uuid])
    else:
+     print('Stopping advertising due to state change...')
      bleno.stopAdvertising()
 
-bleno.on('stateChange', onStateChange)
 
 def onAdvertisingStart(error):
     print('on -> advertisingStart: ' + ('error ' + error if error else 'success'))
 
     if not error:
+        print('Setting services...')
         bleno.setServices([
             BlenoPrimaryService({
                 'uuid': uuid,
@@ -32,16 +33,17 @@ def onAdvertisingStart(error):
                     ]
             })
         ])
-bleno.on('advertisingStart', onAdvertisingStart)
+    else:
+        print('Error in advertising start: ', error)
 
+
+
+bleno.on('stateChange', onStateChange)
+bleno.on('advertisingStart', onAdvertisingStart)
 bleno.start()
 
 print ('Hit <ENTER> to disconnect')
-
-if (sys.version_info > (3, 0)):
-    input()
-else:
-    raw_input()
+input()
 
 bleno.stopAdvertising()
 bleno.disconnect()

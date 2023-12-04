@@ -1,58 +1,13 @@
-from pybleno import *
-import sys
-import signal
-from EchoCharacteristic import *
+from flask import Flask
+import random
 
+app = Flask(__name__)
 
-uuid = "0000ec00-0000-1000-8000-00805f9b34fb"
-characteristicId = "0000ec0f-0000-1000-8000-00805f9b34fb"
+@app.route('/scale')
+def scale_reading():
+    # Replace this with the actual scale reading logic
+    scale_value = random.randint(1, 100)  # Simulated scale value
+    return str(scale_value)
 
-bleno = Bleno()
-
-def onStateChange(state):
-   print('on -> stateChange: ' + state)
-
-   if (state == 'poweredOn'):
-     print('Starting to advertise...')
-     bleno.startAdvertising('echo', [uuid])
-   else:
-     print('Stopping advertising due to state change...')
-     bleno.stopAdvertising()
-
-
-def onAdvertisingStart(error):
-    print('on -> advertisingStart: ' + ('error ' + error if error else 'success'))
-
-    if not error:
-        print('Setting services...')
-        bleno.setServices([
-            BlenoPrimaryService({
-                'uuid': uuid,
-                'characteristics': [
-                    EchoCharacteristic(characteristicId)
-                    ]
-            })
-        ])
-    else:
-        print('Error in advertising start: ', error)
-
-def onServicesSet(error):
-    if error:
-        print('Services setting failed: ', error)
-    else:
-        print('Services successfully set')
-
-
-bleno.on('stateChange', onStateChange)
-bleno.on('advertisingStart', onAdvertisingStart)
-bleno.on('servicesSet', onServicesSet)
-bleno.start()
-
-print ('Hit <ENTER> to disconnect')
-input()
-
-bleno.stopAdvertising()
-bleno.disconnect()
-
-print ('terminated.')
-sys.exit(1)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=3000)

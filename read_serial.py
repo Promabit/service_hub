@@ -1,5 +1,4 @@
 import serial
-import time
 from serial.serialutil import SerialException
 
 # CAS PR-II device info

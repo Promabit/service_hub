@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, Response
 from flask_cors import CORS
 import random
 from read_serial import read_scale_data 
@@ -8,7 +8,7 @@ CORS(app, resources={r"/*": {"origins": ["http://localhost:3000"]}}, supports_cr
 
 @app.route('/')
 def status_check():
-    return jsonify({'status': 'ok'})
+    return Response(status=200)
 
 @app.route('/scale')
 def scale_reading():

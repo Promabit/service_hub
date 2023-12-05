@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": ["http://localhost:3000"]}}, supports_credentials=True)
 
 @app.route('/')
-def scale_reading():
+def status_check():
     return jsonify({'status': 'ok'})
 
 @app.route('/scale')

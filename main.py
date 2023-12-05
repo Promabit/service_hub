@@ -6,6 +6,10 @@ from read_serial import read_scale_data
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": ["http://localhost:3000"]}}, supports_credentials=True)
 
+@app.route('/')
+def scale_reading():
+    return jsonify({'status': 'ok'})
+
 @app.route('/scale')
 def scale_reading():
     weight, is_stable = read_scale_data('/dev/ttyUSB0')

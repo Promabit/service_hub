@@ -63,8 +63,3 @@ def read_scale_data(port_name):
                 raise SerialException("Port is not writable. Cannot request digital scale data.")
     except SerialException as e:
         print("Serial port error:", e)
-
-# Example usage
-# port_name = '/dev/ttyUSB0'  # Replace with your actual serial port
-# weight, is_stable = read_scale_data(port_name)
-# print("Result:", weight, is_stable)

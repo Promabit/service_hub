@@ -7,7 +7,7 @@ from threading import Lock
 scale_lock = Lock()
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:3000"]}}, supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "https://staging.promabit.com", "https://insider.cszoldseg.com", "https://cszoldseg.com"]}}, supports_credentials=True)
 
 @app.route('/')
 def status_check():

@@ -24,4 +24,4 @@ def scale_reading():
         return Response(status=400)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=3000)
+    app.run(host='192.168.0.111', port=443, ssl_context=('./192.168.0.111+1.pem', './192.168.0.111+1-key.pem'))

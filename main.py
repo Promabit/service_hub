@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, Response
 from flask_cors import CORS
-import random
 from read_serial import read_scale_data 
 from threading import Lock
 
